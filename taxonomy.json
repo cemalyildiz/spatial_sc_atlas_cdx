@@ -1,0 +1,766 @@
+[
+  {
+    "disease": "Breast cancer",
+    "group": "Cancer",
+    "tissue": "Breast",
+    "terms": [
+      "breast cancer",
+      "breast carcinoma",
+      "mammary carcinoma",
+      "breast tumor",
+      "breast tumour",
+      "TNBC"
+    ],
+    "subtypes": {
+      "Triple-negative (TNBC)": [
+        "triple-negative",
+        "triple negative",
+        "TNBC"
+      ],
+      "HER2-positive": [
+        "HER2-positive",
+        "HER2 positive",
+        "HER2+"
+      ],
+      "ER-positive": [
+        "ER-positive",
+        "ER positive",
+        "ER+"
+      ],
+      "Invasive ductal carcinoma": [
+        "invasive ductal carcinoma"
+      ],
+      "Ductal carcinoma in situ": [
+        "ductal carcinoma in situ",
+        "DCIS"
+      ],
+      "Invasive lobular carcinoma": [
+        "invasive lobular carcinoma"
+      ]
+    }
+  },
+  {
+    "disease": "Lung cancer",
+    "group": "Cancer",
+    "tissue": "Lung",
+    "terms": [
+      "lung cancer",
+      "lung carcinoma",
+      "lung adenocarcinoma",
+      "NSCLC",
+      "SCLC",
+      "lung squamous",
+      "lung tumor",
+      "lung tumour",
+      "LUAD",
+      "LUSC",
+      "non-small-cell lung",
+      "small-cell lung"
+    ],
+    "subtypes": {
+      "Adenocarcinoma (LUAD)": [
+        "lung adenocarcinoma",
+        "LUAD"
+      ],
+      "Squamous cell carcinoma (LUSC)": [
+        "lung squamous",
+        "LUSC"
+      ],
+      "Small cell lung cancer": [
+        "small cell lung cancer",
+        "small-cell lung cancer",
+        "SCLC"
+      ],
+      "Non-small cell lung cancer": [
+        "non-small cell lung",
+        "non-small-cell lung",
+        "NSCLC"
+      ]
+    }
+  },
+  {
+    "disease": "Colorectal cancer",
+    "group": "Cancer",
+    "tissue": "Colon / rectum",
+    "terms": [
+      "colorectal cancer",
+      "colorectal carcinoma",
+      "colon cancer",
+      "rectal cancer",
+      "colorectal adenocarcinoma",
+      "colon adenocarcinoma",
+      "rectal adenocarcinoma"
+    ],
+    "subtypes": {
+      "MSI-high / dMMR": [
+        "MSI-high",
+        "MSI-H",
+        "mismatch repair deficient",
+        "dMMR"
+      ],
+      "Microsatellite stable": [
+        "microsatellite stable",
+        "microsatellite-stable"
+      ],
+      "Mucinous adenocarcinoma": [
+        "mucinous adenocarcinoma"
+      ]
+    }
+  },
+  {
+    "disease": "Pancreatic cancer",
+    "group": "Cancer",
+    "tissue": "Pancreas",
+    "terms": [
+      "pancreatic cancer",
+      "pancreatic ductal adenocarcinoma",
+      "PDAC"
+    ],
+    "subtypes": {
+      "Ductal adenocarcinoma (PDAC)": [
+        "pancreatic ductal adenocarcinoma",
+        "PDAC"
+      ],
+      "Classical": [
+        "classical"
+      ],
+      "Basal-like": [
+        "basal-like",
+        "basal like"
+      ]
+    }
+  },
+  {
+    "disease": "Liver cancer",
+    "group": "Cancer",
+    "tissue": "Liver",
+    "terms": [
+      "liver cancer",
+      "hepatocellular carcinoma",
+      "cholangiocarcinoma",
+      "HCC"
+    ],
+    "subtypes": {
+      "Hepatocellular carcinoma": [
+        "hepatocellular carcinoma",
+        "HCC"
+      ],
+      "Intrahepatic cholangiocarcinoma": [
+        "intrahepatic cholangiocarcinoma"
+      ]
+    }
+  },
+  {
+    "disease": "Kidney cancer",
+    "group": "Cancer",
+    "tissue": "Kidney",
+    "terms": [
+      "renal cell carcinoma",
+      "kidney cancer",
+      "renal cancer",
+      "ccRCC",
+      "renal carcinoma"
+    ],
+    "subtypes": {
+      "Clear cell RCC": [
+        "clear cell renal",
+        "clear-cell renal",
+        "ccRCC"
+      ],
+      "Papillary RCC": [
+        "papillary renal"
+      ],
+      "Chromophobe RCC": [
+        "chromophobe"
+      ]
+    }
+  },
+  {
+    "disease": "Brain cancer",
+    "group": "Cancer",
+    "tissue": "Brain",
+    "terms": [
+      "glioblastoma",
+      "glioma",
+      "medulloblastoma",
+      "meningioma",
+      "GBM"
+    ],
+    "subtypes": {
+      "Glioblastoma": [
+        "glioblastoma",
+        "GBM"
+      ],
+      "IDH-mutant glioma": [
+        "IDH-mutant",
+        "IDH mutant"
+      ],
+      "IDH-wildtype glioma": [
+        "IDH-wildtype",
+        "IDH wildtype"
+      ],
+      "Medulloblastoma": [
+        "medulloblastoma"
+      ],
+      "Meningioma": [
+        "meningioma"
+      ]
+    }
+  },
+  {
+    "disease": "Prostate cancer",
+    "group": "Cancer",
+    "tissue": "Prostate",
+    "terms": [
+      "prostate cancer",
+      "prostatic cancer",
+      "prostate adenocarcinoma",
+      "prostatic adenocarcinoma"
+    ],
+    "subtypes": {
+      "Castration-resistant": [
+        "castration-resistant",
+        "castration resistant",
+        "CRPC"
+      ],
+      "Neuroendocrine prostate cancer": [
+        "neuroendocrine prostate",
+        "NEPC"
+      ]
+    }
+  },
+  {
+    "disease": "Ovarian cancer",
+    "group": "Cancer",
+    "tissue": "Ovary",
+    "terms": [
+      "ovarian cancer",
+      "ovarian carcinoma",
+      "high-grade serous",
+      "HGSOC"
+    ],
+    "subtypes": {
+      "High-grade serous carcinoma": [
+        "high-grade serous",
+        "high grade serous",
+        "HGSOC"
+      ],
+      "Clear cell carcinoma": [
+        "ovarian clear cell"
+      ],
+      "Low-grade serous carcinoma": [
+        "low-grade serous"
+      ]
+    }
+  },
+  {
+    "disease": "Melanoma",
+    "group": "Cancer",
+    "tissue": "Skin / eye",
+    "terms": [
+      "melanoma"
+    ],
+    "subtypes": {
+      "Cutaneous melanoma": [
+        "cutaneous melanoma"
+      ],
+      "Uveal melanoma": [
+        "uveal melanoma"
+      ],
+      "Acral melanoma": [
+        "acral melanoma"
+      ]
+    }
+  },
+  {
+    "disease": "Head and neck cancer",
+    "group": "Cancer",
+    "tissue": "Head / neck",
+    "terms": [
+      "head and neck",
+      "HNSCC",
+      "nasopharyngeal carcinoma",
+      "oral squamous",
+      "nasopharyngeal cancer"
+    ],
+    "subtypes": {
+      "HPV-positive": [
+        "HPV-positive",
+        "HPV positive",
+        "HPV+"
+      ],
+      "HPV-negative": [
+        "HPV-negative",
+        "HPV negative",
+        "HPV-"
+      ],
+      "Nasopharyngeal carcinoma": [
+        "nasopharyngeal carcinoma"
+      ]
+    }
+  },
+  {
+    "disease": "Gastric cancer",
+    "group": "Cancer",
+    "tissue": "Stomach",
+    "terms": [
+      "gastric cancer",
+      "gastric carcinoma",
+      "gastric adenocarcinoma",
+      "stomach cancer"
+    ],
+    "subtypes": {
+      "Diffuse type": [
+        "diffuse-type",
+        "diffuse type"
+      ],
+      "Intestinal type": [
+        "intestinal-type",
+        "intestinal type"
+      ],
+      "Signet ring cell": [
+        "signet ring",
+        "signet-ring"
+      ]
+    }
+  },
+  {
+    "disease": "Esophageal cancer",
+    "group": "Cancer",
+    "tissue": "Esophagus",
+    "terms": [
+      "esophageal cancer",
+      "oesophageal cancer",
+      "esophageal carcinoma",
+      "esophageal squamous",
+      "esophageal adenocarcinoma"
+    ],
+    "subtypes": {
+      "Squamous cell carcinoma": [
+        "esophageal squamous",
+        "oesophageal squamous",
+        "ESCC"
+      ],
+      "Adenocarcinoma": [
+        "esophageal adenocarcinoma",
+        "oesophageal adenocarcinoma"
+      ]
+    }
+  },
+  {
+    "disease": "Bladder cancer",
+    "group": "Cancer",
+    "tissue": "Bladder",
+    "terms": [
+      "bladder cancer",
+      "urothelial carcinoma",
+      "bladder carcinoma"
+    ],
+    "subtypes": {
+      "Muscle-invasive": [
+        "muscle-invasive",
+        "muscle invasive",
+        "MIBC"
+      ],
+      "Non-muscle-invasive": [
+        "non-muscle-invasive",
+        "NMIBC"
+      ]
+    }
+  },
+  {
+    "disease": "Leukemia",
+    "group": "Cancer",
+    "tissue": "Blood / bone marrow",
+    "terms": [
+      "leukemia",
+      "leukaemia"
+    ],
+    "subtypes": {
+      "Acute myeloid leukemia": [
+        "acute myeloid",
+        "AML"
+      ],
+      "Acute lymphoblastic leukemia": [
+        "acute lymphoblastic"
+      ],
+      "Chronic lymphocytic leukemia": [
+        "chronic lymphocytic",
+        "CLL"
+      ],
+      "Chronic myeloid leukemia": [
+        "chronic myeloid",
+        "CML"
+      ]
+    }
+  },
+  {
+    "disease": "Lymphoma",
+    "group": "Cancer",
+    "tissue": "Lymph node / blood",
+    "terms": [
+      "lymphoma"
+    ],
+    "subtypes": {
+      "Diffuse large B-cell lymphoma": [
+        "diffuse large B",
+        "DLBCL"
+      ],
+      "Follicular lymphoma": [
+        "follicular lymphoma"
+      ],
+      "Hodgkin lymphoma": [
+        "Hodgkin lymphoma"
+      ],
+      "Mantle cell lymphoma": [
+        "mantle cell lymphoma"
+      ]
+    }
+  },
+  {
+    "disease": "Multiple myeloma",
+    "group": "Cancer",
+    "tissue": "Bone marrow",
+    "terms": [
+      "multiple myeloma",
+      "plasma cell myeloma"
+    ],
+    "subtypes": {}
+  },
+  {
+    "disease": "Sarcoma",
+    "group": "Cancer",
+    "tissue": "Soft tissue / bone",
+    "terms": [
+      "sarcoma"
+    ],
+    "subtypes": {
+      "Osteosarcoma": [
+        "osteosarcoma"
+      ],
+      "Ewing sarcoma": [
+        "Ewing"
+      ],
+      "Soft tissue sarcoma": [
+        "soft tissue sarcoma",
+        "soft-tissue sarcoma"
+      ],
+      "Liposarcoma": [
+        "liposarcoma"
+      ]
+    }
+  },
+  {
+    "disease": "Thyroid cancer",
+    "group": "Cancer",
+    "tissue": "Thyroid",
+    "terms": [
+      "thyroid cancer",
+      "thyroid carcinoma"
+    ],
+    "subtypes": {
+      "Papillary thyroid carcinoma": [
+        "papillary thyroid"
+      ],
+      "Anaplastic thyroid carcinoma": [
+        "anaplastic thyroid"
+      ]
+    }
+  },
+  {
+    "disease": "Endometrial cancer",
+    "group": "Cancer",
+    "tissue": "Endometrium",
+    "terms": [
+      "endometrial cancer",
+      "endometrial carcinoma"
+    ],
+    "subtypes": {
+      "Endometrioid": [
+        "endometrioid"
+      ],
+      "Serous": [
+        "serous carcinoma"
+      ]
+    }
+  },
+  {
+    "disease": "Cervical cancer",
+    "group": "Cancer",
+    "tissue": "Cervix",
+    "terms": [
+      "cervical cancer",
+      "cervical carcinoma"
+    ],
+    "subtypes": {}
+  },
+  {
+    "disease": "Inflammatory bowel disease",
+    "group": "Immune / inflammatory",
+    "tissue": "Intestine",
+    "terms": [
+      "inflammatory bowel",
+      "Crohn",
+      "ulcerative colitis"
+    ],
+    "subtypes": {
+      "Crohn’s disease": [
+        "Crohn"
+      ],
+      "Ulcerative colitis": [
+        "ulcerative colitis"
+      ]
+    }
+  },
+  {
+    "disease": "Arthritis",
+    "group": "Immune / inflammatory",
+    "tissue": "Joint / synovium",
+    "terms": [
+      "arthritis"
+    ],
+    "subtypes": {
+      "Rheumatoid arthritis": [
+        "rheumatoid arthritis"
+      ],
+      "Psoriatic arthritis": [
+        "psoriatic arthritis"
+      ],
+      "Osteoarthritis": [
+        "osteoarthritis"
+      ]
+    }
+  },
+  {
+    "disease": "Lupus",
+    "group": "Immune / inflammatory",
+    "tissue": "Kidney / blood / skin",
+    "terms": [
+      "lupus"
+    ],
+    "subtypes": {
+      "Lupus nephritis": [
+        "lupus nephritis"
+      ],
+      "Systemic lupus erythematosus": [
+        "systemic lupus erythematosus"
+      ]
+    }
+  },
+  {
+    "disease": "Inflammatory skin disease",
+    "group": "Immune / inflammatory",
+    "tissue": "Skin",
+    "terms": [
+      "psoriasis",
+      "atopic dermatitis",
+      "eczema",
+      "hidradenitis"
+    ],
+    "subtypes": {
+      "Psoriasis": [
+        "psoriasis"
+      ],
+      "Atopic dermatitis": [
+        "atopic dermatitis",
+        "eczema"
+      ],
+      "Hidradenitis suppurativa": [
+        "hidradenitis"
+      ]
+    }
+  },
+  {
+    "disease": "Multiple sclerosis",
+    "group": "Immune / inflammatory",
+    "tissue": "Brain / spinal cord",
+    "terms": [
+      "multiple sclerosis"
+    ],
+    "subtypes": {}
+  },
+  {
+    "disease": "Alzheimer’s disease",
+    "group": "Neurological",
+    "tissue": "Brain",
+    "terms": [
+      "Alzheimer"
+    ],
+    "subtypes": {}
+  },
+  {
+    "disease": "Parkinson’s disease",
+    "group": "Neurological",
+    "tissue": "Brain",
+    "terms": [
+      "Parkinson"
+    ],
+    "subtypes": {}
+  },
+  {
+    "disease": "Motor neuron disease",
+    "group": "Neurological",
+    "tissue": "Brain / spinal cord",
+    "terms": [
+      "amyotrophic lateral sclerosis",
+      "motor neuron disease"
+    ],
+    "subtypes": {
+      "Amyotrophic lateral sclerosis": [
+        "amyotrophic lateral sclerosis"
+      ]
+    }
+  },
+  {
+    "disease": "COVID-19",
+    "group": "Infectious",
+    "tissue": "Lung / blood",
+    "terms": [
+      "COVID-19",
+      "COVID19",
+      "SARS-CoV-2"
+    ],
+    "subtypes": {
+      "Long COVID": [
+        "long COVID",
+        "post-acute sequelae"
+      ]
+    }
+  },
+  {
+    "disease": "Tuberculosis",
+    "group": "Infectious",
+    "tissue": "Lung",
+    "terms": [
+      "tuberculosis"
+    ],
+    "subtypes": {}
+  },
+  {
+    "disease": "HIV infection",
+    "group": "Infectious",
+    "tissue": "Blood / lymph node",
+    "terms": [
+      "HIV infection",
+      "HIV-1",
+      "human immunodeficiency"
+    ],
+    "subtypes": {}
+  },
+  {
+    "disease": "Diabetes",
+    "group": "Metabolic",
+    "tissue": "Pancreas",
+    "terms": [
+      "diabetes",
+      "diabetic"
+    ],
+    "subtypes": {
+      "Type 1 diabetes": [
+        "type 1 diabetes",
+        "type-1 diabetes",
+        "T1D"
+      ],
+      "Type 2 diabetes": [
+        "type 2 diabetes",
+        "type-2 diabetes",
+        "T2D"
+      ]
+    }
+  },
+  {
+    "disease": "Liver disease",
+    "group": "Metabolic",
+    "tissue": "Liver",
+    "terms": [
+      "cirrhosis",
+      "steatohepatitis",
+      "fatty liver",
+      "MASLD",
+      "MASH"
+    ],
+    "subtypes": {
+      "Steatohepatitis": [
+        "steatohepatitis",
+        "MASH"
+      ],
+      "Cirrhosis": [
+        "cirrhosis"
+      ]
+    }
+  },
+  {
+    "disease": "Pulmonary disease",
+    "group": "Respiratory",
+    "tissue": "Lung",
+    "terms": [
+      "pulmonary fibrosis",
+      "asthma",
+      "COPD",
+      "chronic obstructive pulmonary"
+    ],
+    "subtypes": {
+      "Idiopathic pulmonary fibrosis": [
+        "idiopathic pulmonary fibrosis",
+        "IPF"
+      ],
+      "Asthma": [
+        "asthma"
+      ],
+      "COPD": [
+        "COPD",
+        "chronic obstructive pulmonary"
+      ]
+    }
+  },
+  {
+    "disease": "Cardiovascular disease",
+    "group": "Cardiovascular",
+    "tissue": "Heart / artery",
+    "terms": [
+      "heart failure",
+      "cardiomyopathy",
+      "myocardial infarction",
+      "atherosclerosis"
+    ],
+    "subtypes": {
+      "Dilated cardiomyopathy": [
+        "dilated cardiomyopathy"
+      ],
+      "Hypertrophic cardiomyopathy": [
+        "hypertrophic cardiomyopathy"
+      ],
+      "Myocardial infarction": [
+        "myocardial infarction"
+      ],
+      "Atherosclerosis": [
+        "atherosclerosis"
+      ]
+    }
+  },
+  {
+    "disease": "Kidney disease",
+    "group": "Renal",
+    "tissue": "Kidney",
+    "terms": [
+      "chronic kidney disease",
+      "acute kidney injury",
+      "diabetic nephropathy",
+      "IgA nephropathy"
+    ],
+    "subtypes": {
+      "Chronic kidney disease": [
+        "chronic kidney disease"
+      ],
+      "Acute kidney injury": [
+        "acute kidney injury"
+      ],
+      "IgA nephropathy": [
+        "IgA nephropathy"
+      ],
+      "Diabetic nephropathy": [
+        "diabetic nephropathy"
+      ]
+    }
+  }
+]

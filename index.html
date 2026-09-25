@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Human Spatial Atlas · Dataset Explorer</title>
+  <meta name="description" content="Discover human spatial transcriptomics and single-cell RNA-seq datasets. Filter by disease, subtype, technology, and evidence of paired modalities.">
+  <meta name="theme-color" content="#102b3c">
+  <link rel="icon" href="./favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="./style.css">
+  <script type="module" src="./app.js"></script>
+</head>
+<body>
+  <a class="skip" href="#results">Skip to datasets</a>
+  <header class="topbar">
+    <a class="brand" href="./" aria-label="Human Spatial Atlas home"><span class="brand-icon" aria-hidden="true">H<span>+</span></span><span>HUMAN<span class="brand-sub">SPATIAL ATLAS</span></span></a>
+    <nav aria-label="Main navigation"><a class="active" href="./">Explore datasets</a><button id="methodology">Methodology</button><button id="sources">Sources & updates</button></nav>
+    <a class="repo-link" href="https://github.com/cemalyildiz/spatial_sc_atlas_cdx" target="_blank" rel="noopener noreferrer">GitHub <span aria-hidden="true">↗</span></a>
+  </header>
+  <div class="page-layout">
+    <aside id="filters" class="filters" aria-label="Dataset filters">
+      <div class="filter-top"><h2>Refine your search</h2><button id="reset" class="text-button">Reset all</button></div>
+      <div class="human-label"><span aria-hidden="true">◉</span> Homo sapiens only</div>
+      <div id="filter-fields"><p class="muted">Loading filters…</p></div>
+      <button id="filter-done" class="button filter-close">Show results →</button><div class="filter-note">Selections within a filter use OR. Different filters use AND.</div>
+    </aside>
+    <main id="main">
+      <section class="intro" aria-labelledby="page-title"><div><div class="eyebrow">THE HUMAN TRANSCRIPTOMICS INDEX</div><h1 id="page-title">Find the right dataset<span>.</span></h1><p>Spatial context. Single-cell detail. One place to discover both.</p></div><div class="scope-tag"><span class="tiny-label">RESEARCH SCOPE</span><strong>Human disease</strong><span>Cancer & beyond</span></div></section>
+      <section id="stats" class="stats" aria-label="Catalogue overview"><div><strong>—</strong><span>Indexed records</span></div><div><strong>—</strong><span>Both modalities reported</span></div><div><strong>—</strong><span>Disease categories</span></div><div><strong>4</strong><span>Discovery sources</span></div></section>
+      <section class="workspace" aria-label="Dataset search">
+        <form id="search-form" role="search"><span class="search-icon" aria-hidden="true">⌕</span><input id="search" type="search" placeholder="Search disease, subtype, technology, accession or publication…" aria-label="Search datasets" autocomplete="off"><span class="search-hint">/</span></form>
+        <div class="workspace-bar"><div class="presets" role="group" aria-label="Quick modality filters"><button data-preset="all" class="selected" aria-pressed="true">All datasets</button><button data-preset="both" aria-pressed="false">Spatial + cell / nucleus <span class="mini-dot"></span></button><button data-preset="spatial" aria-pressed="false">Spatial</button><button data-preset="single" aria-pressed="false">Single-cell / nucleus</button></div><button id="mobile-filters" class="button">Filters</button></div>
+      </section>
+      <div id="active-filters" class="active-filters" aria-label="Active filters"></div>
+      <section id="results" aria-label="Search results" tabindex="-1">
+        <div class="results-toolbar"><div><h2 id="result-count" aria-live="polite">Loading real datasets…</h2><span id="result-note" class="muted">Retrieving the published catalogue</span></div><div class="result-actions"><label class="sort-label">Sort <select id="sort"><option value="priority">Paired evidence first</option><option value="newest">Newest release</option><option value="oldest">Oldest release</option><option value="updated">Recently checked</option><option value="title">Title A–Z</option></select></label><button id="share" class="button" title="Copy a link to these filters">Share</button><button id="export" class="button export">↓ Export CSV</button></div></div>
+        <div class="table-wrap"><table><thead><tr><th scope="col">STUDY / DATASET</th><th scope="col">DISEASE & SUBTYPE</th><th scope="col">MODALITIES</th><th scope="col">RELEASED</th><th scope="col"><span class="sr-only">Details</span></th></tr></thead><tbody id="rows"></tbody></table><div id="empty" hidden></div></div>
+        <div class="pagination"><span id="page-info" class="muted"></span><div><button id="previous" class="button">← Previous</button><span id="page-number"></span><button id="next" class="button">Next →</button></div></div>
+      </section>
+      <footer><div><span class="footer-mark">H+</span> Built for discovery. Grounded in source evidence.</div><button id="freshness" class="text-button">Checking source status…</button></footer>
+    </main>
+  </div>
+  <dialog id="detail"><div class="dialog-head"><span class="eyebrow" id="dialog-kind">DATASET DETAILS</span><button id="close-dialog" class="icon-button" aria-label="Close details">×</button></div><div id="dialog-content"></div></dialog>
+  <div id="toast" class="toast" role="status" hidden></div>
+  <noscript><p>This catalogue needs JavaScript for filtering. Download the <a href="./catalog.json">metadata catalogue</a> directly.</p></noscript>
+</body>
+</html>

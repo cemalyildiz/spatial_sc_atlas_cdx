@@ -1,0 +1,73 @@
+name: Update human atlas and publish
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      refresh:
+        description: Refresh public repository metadata before publishing
+        type: boolean
+        default: true
+  schedule:
+    - cron: '23 4 * * *'
+
+concurrency:
+  group: atlas-publish
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Collect public human metadata
+        if: github.event_name == 'schedule' || (github.event_name == 'workflow_dispatch' && inputs.refresh)
+        run: python -B -u collect.py --limit 1500 --ae-limit 200
+      - name: Validate catalogue and classification
+        run: |
+          python -B validate.py
+          python -B test_collect.py
+          node --test test_search.mjs
+          node --check app.js
+      - name: Save refreshed catalogue
+        if: github.event_name == 'schedule' || (github.event_name == 'workflow_dispatch' && inputs.refresh)
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add catalog.json
+          if ! git diff --cached --quiet; then
+            git commit -m 'Refresh human dataset catalogue'
+            git push origin HEAD:main
+          fi
+      - name: Package public website only
+        run: |
+          mkdir site_cdx
+          cp index.html style.css app.js search.mjs favicon.svg catalog.json .nojekyll site_cdx/
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: site_cdx
+  publish:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Publish GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

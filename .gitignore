@@ -1,0 +1,8 @@
+cache_cdx/
+__pycache__/
+*.pyc
+catalog.tmp
+.DS_Store
+site_cdx/
+qa_cdx/
+.sites-runtime/

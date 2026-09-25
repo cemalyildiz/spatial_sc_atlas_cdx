@@ -1,0 +1,40 @@
+{
+  "GSE176078": {
+    "modalities": ["Spatial", "scRNA-seq"],
+    "platforms": ["Visium", "10x Chromium"],
+    "approaches": ["Sequencing-based"],
+    "diseases": ["Breast cancer"],
+    "subtypes": ["ER-positive", "HER2-positive", "Triple-negative (TNBC)"],
+    "pairing": "Matched donors / samples",
+    "validation": "Source-reviewed pairing",
+    "evidence": ["Wu et al. profiled 26 breast tumors with scRNA-seq. Their six-sample spatial cohort includes four tumors from that scRNA-seq cohort (CID4535, CID4290, CID44971 and CID4465), plus two additional tumors. Matching therefore applies to a subset, not every sample.", "The GEO record contains single-cell data; spatial count matrices, spot metadata and H&E images are separately deposited at Zenodo 4739739."],
+    "evidence_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9044823/",
+    "availability": ["Processed matrix", "Spatial coordinates", "Histology images", "Cell annotations"],
+    "access": "Open processed / controlled raw",
+    "links": [{"label": "Spatial matrices, coordinates & images (Zenodo)", "url": "https://doi.org/10.5281/zenodo.4739739"}, {"label": "Controlled raw data (EGA)", "url": "https://ega-archive.org/studies/EGAS00001005173"}],
+    "updated": "2026-02-20"
+  },
+  "GSE308146": {
+    "modalities": ["Spatial", "scRNA-seq"],
+    "platforms": ["CosMx", "Xenium", "MERFISH", "10x Chromium"],
+    "approaches": ["Imaging-based", "Sequencing-based"],
+    "pairing": "Same study — verified",
+    "validation": "Source-reviewed pairing",
+    "evidence": ["The GEO experimental design describes a matched-section comparison of three imaging platforms and paired Chromium FLEX scRNA-seq. This accession specifically deposits the CosMx component. The study includes 17 tumor and 16 normal tissue types; sample-level pairing and access to the other modalities must be checked in the linked publication."],
+    "evidence_url": "https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE308146",
+    "links": [{"label": "Study and other modality accessions", "url": "https://pubmed.ncbi.nlm.nih.gov/41266321/"}],
+    "updated": "2026-01-05"
+  },
+  "GSE284230": {
+    "modalities": ["Spatial", "scRNA-seq"],
+    "pairing": "Same study — verified",
+    "validation": "Source-reviewed pairing",
+    "diseases": ["Inflammatory bowel disease"],
+    "groups": ["Immune / inflammatory"],
+    "subtypes": ["Crohn’s disease", "Fistulating Crohn’s disease"],
+    "evidence": ["The GEO record identifies scRNA-seq of human intestinal samples and membership in parent study GSE284232. The associated publication, Spatial fibroblast niches define Crohn’s fistulae, describes the spatial expression atlas. This accession is the scRNA-seq component; the parent study links the other modalities. Donor matching has not been independently established here."],
+    "evidence_url": "https://www.ncbi.nlm.nih.gov/bioproject/PRJNA1198034",
+    "links": [{"label": "Parent study and spatial subseries", "url": "https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE284232"}, {"label": "Spatial fibroblast niches define Crohn’s fistulae", "url": "https://pubmed.ncbi.nlm.nih.gov/41224999/"}],
+    "updated": "2026-04-24"
+  }
+}
