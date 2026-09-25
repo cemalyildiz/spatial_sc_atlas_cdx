@@ -24,6 +24,9 @@ def validate():
             assert 'Spatial' in r['modalities'] and len(r['modalities'])>1,r['id']
     for source in ['GEO','ArrayExpress','CELLxGENE','PubMed / Europe PMC']:
         assert source in data['sources'],source
+    for publication in data.get('publications',[]):
+        if publication.get('date'):
+            assert dt.date.fromisoformat(publication['date']) <= dt.datetime.now(dt.timezone.utc).date(), publication.get('pmid')
     print(f'Validated {len(rows):,} human records, unique accessions, dates, links and pairing evidence.')
 
 if __name__=='__main__': validate()

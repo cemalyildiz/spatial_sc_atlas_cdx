@@ -230,7 +230,7 @@ def collect_cellxgene():
     return records,dict(scanned=len(collections),note='Human disease datasets only. Healthy control datasets may accompany the original collection. Collection membership does not establish donor matching.')
 
 def collect_publications(limit):
-    query='(TITLE_ABS:"spatial transcriptomics" OR TITLE_ABS:"single-cell RNA sequencing" OR TITLE_ABS:Xenium OR TITLE_ABS:CosMx) AND (TITLE_ABS:human OR TITLE_ABS:patients) AND FIRST_PDATE:[2024-01-01 TO 3000-12-31] sort_date:y'
+    query=f'(TITLE_ABS:"spatial transcriptomics" OR TITLE_ABS:"single-cell RNA sequencing" OR TITLE_ABS:Xenium OR TITLE_ABS:CosMx) AND (TITLE_ABS:human OR TITLE_ABS:patients) AND FIRST_PDATE:[2024-01-01 TO {dt.datetime.now(dt.timezone.utc).date().isoformat()}] sort_date:y'
     result=api('https://www.ebi.ac.uk/europepmc/webservices/rest/search',query=query,format='json',pageSize=min(limit,1000),resultType='core')
     pubs=[]; geo=set()
     for p in result.get('resultList',{}).get('result',[]):
