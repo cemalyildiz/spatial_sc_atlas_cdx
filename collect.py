@@ -55,7 +55,8 @@ def api(base, **params):
     return get(base + '?' + urllib.parse.urlencode(params))
 
 def matches(text, term):
-    return bool(re.search(r'(?<!\w)(?<!non-)(?<!non )' + re.escape(term) + r'(?!\w)', text, re.I))
+    extra=r'(?<!minimally )(?<!pre-)' if term.lower()=='invasive adenocarcinoma' else ''
+    return bool(re.search(extra + r'(?<!\w)(?<!non-)(?<!non )' + re.escape(term) + r'(?!\w)', text, re.I))
 
 def clean(text):
     return re.sub(r'\s+', ' ', html.unescape(re.sub('<[^>]+>', ' ', text or ''))).strip()
@@ -65,7 +66,9 @@ def classify(text):
     for row in TAXONOMY:
         if any(matches(text, term) for term in row['terms']):
             diseases.append(row['disease']); groups.append(row['group']); tissues.append(row['tissue'])
-            subtypes.extend(name for name, terms in row['subtypes'].items() if any(matches(text, t) for t in terms))
+            found=[name for name, terms in row['subtypes'].items() if any(matches(text,t) for t in terms)]
+            subtypes.extend(found)
+            subtypes.extend(parent for name in found for parent in row.get('subtype_parents',{}).get(name,[]))
     if not diseases:
         if re.search(r'\b(cancer|carcinoma|tumou?r|malignan|neoplas)', text, re.I):
             diseases, groups = ['Other cancer'], ['Cancer']
@@ -90,6 +93,10 @@ def classify(text):
 def record(identifier, title, summary, url, source, released, **extra):
     if re.search(r'\[(?:bulk|ATAC|ChIP|WGS|WES)[^\]]*\]|\((?:bulk RNA|ATAC|ChIP)[^)]*\)',title,re.I): return None
     info = classify(title + ' ' + summary)
+    if info:
+        from relationships import components
+        component_modes=components(title)
+        if component_modes:info['modalities']=component_modes
     if info and identifier in CURATION:
         info.update({k:v for k,v in CURATION[identifier].items() if k in info})
     if not info or not info['modalities']: return None
@@ -121,15 +128,21 @@ def geo_fetch(ids):
             if any(x in row.get('suppfile','').upper() for x in ['H5','MTX','RDS','TXT','CSV']): rec['availability'].append('Processed files listed')
             rec['file_types'] = row.get('suppfile','')
             rec['sample_examples'] = [x.get('title','') for x in row.get('samples',[])[:5]]
+            from relationships import add_geo_metadata
+            add_geo_metadata(rec,row)
             records.append(rec)
         print('GEO summaries:', min(offset+60,len(ids)), '/', len(ids), flush=True)
     return records
+
+def curated_geo_ids():
+    # Reviewed accessions must be fetched even when discovery queries omit older studies.
+    return ['200' + acc[3:] for acc in CURATION if re.fullmatch(r'GSE\d+', acc)]
 
 def collect_geo(limit):
     queries = []
     spatial = '"spatial transcriptomics" OR "spatial transcriptome" OR "spatial gene expression" OR Xenium OR Visium OR MERFISH OR CosMx OR "Slide-seq" OR "Stereo-seq" OR GeoMx'
     single = '"single cell RNA" OR "single-cell RNA" OR "single nucleus RNA" OR "single-nucleus RNA" OR "scRNA-seq" OR "snRNA-seq"'
-    ids = ['200176078','200199102','200284230','200308146']
+    ids = list(dict.fromkeys(['200199102'] + curated_geo_ids()))
     for label, term, cap in [('Spatial methods',spatial,limit), ('Recent single-cell/nucleus',f'({single}) AND ("2024/01/01"[PDAT] : "3000"[PDAT])',limit)]:
         found,total = geo_search(term,cap); ids += found
         queries.append(dict(label=label,query=term,total=total,retrieved=len(found),limit=cap))
@@ -299,10 +312,12 @@ def main():
     curated=CURATION
     for rec in records:
         if rec['id'] in curated: rec.update(curated[rec['id']])
+    from relationships import enrich
+    records,relationships,relationship_scan=enrich(records,pubs)
     for name, status in statuses.items():
         if name != 'PubMed / Europe PMC': status['count']=sum(name in r['sources'] for r in records)
     records.sort(key=lambda r:r['released'],reverse=True)
-    payload=dict(schema_version=1,generated_at=NOW,sources=statuses,records=records,publications=pubs,taxonomy=TAXONOMY)
+    payload=dict(schema_version=2,relationships=relationships,relationship_scan=relationship_scan,generated_at=NOW,sources=statuses,records=records,publications=pubs,taxonomy=TAXONOMY)
     if not records: raise RuntimeError('No records; existing catalogue untouched')
     temp=ROOT/'catalog.tmp'; temp.write_text(json.dumps(payload,ensure_ascii=False,separators=(',',':'))); temp.replace(ROOT/'catalog.json')
     print('Saved',len(records),'records',flush=True)

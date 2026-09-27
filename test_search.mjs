@@ -10,3 +10,19 @@ test('unknown dates excluded when a date boundary is active',()=>{assert.equal(f
 test('source evidence outranks a newer unpaired record',()=>{assert.equal(sortRecords([base,matched],'priority')[0].id,'b');assert.equal(sortRecords([base,matched],'newest')[0].id,'a');});
 test('subtype search and source accession search',()=>{assert.equal(filterRecords([base,matched],{q:'TNBC'}).length,1);assert.equal(filterRecords([base],{q:'nonexistent'}).length,0);});
 test('CSV protects formula cells and preserves quotes',()=>{assert.equal(csvCell('=HYPERLINK("x")'),'"\'=HYPERLINK(""x"")"');assert.equal(csvCell('a,b'),'"a,b"');});
+
+test('linked accession and relationship level are searchable and filterable',()=>{
+  const linked={...base,related:['GSE189487'],relationship_levels:['Related study — unverified']};
+  assert.equal(filterRecords([linked],{q:'GSE189487',relationship_levels:['Related study — unverified']}).length,1);
+  assert.equal(filterRecords([linked],{relationship_levels:['Matched donors / samples']}).length,0);
+});
+
+test('reviewed LUAD pair is found with the original NSCLC and paired filters',async()=>{
+  const {readFile}=await import('node:fs/promises');
+  const catalogue=JSON.parse(await readFile(new URL('./catalog.json',import.meta.url),'utf8'));
+  const result=filterRecords(catalogue.records,{q:'GSE189357',diseases:['Lung cancer'],subtypes:['Non-small cell lung cancer'],preset:'both',pairing:['Matched donors / samples']});
+  assert.deepEqual(result.map(r=>r.id).sort(),['GSE189357','GSE189487']);
+  assert.equal(result.find(r=>r.id==='GSE189357').sample_count,9);
+  assert.equal(result.find(r=>r.id==='GSE189487').sample_count,6);
+  assert.ok(result.every(r=>r.paired_sample_count===6));
+});

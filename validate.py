@@ -19,9 +19,14 @@ def validate():
         if r['released']:
             assert dt.date.fromisoformat(r['released']) <= dt.datetime.now(dt.timezone.utc).date(), r['id']
         if r['pairing'] in ['Matched donors / samples','Same study — verified']:
-            assert r['validation']=='Source-reviewed pairing' and r.get('evidence_url') and r['evidence'], r['id']
+            assert r['validation'] in ['Source-reviewed pairing','Repository relationship evidence'] and r.get('evidence_url') and r['evidence'], r['id']
+            if r['pairing']=='Matched donors / samples':assert r['validation']=='Source-reviewed pairing',r['id']
         if r['pairing']!='Not applicable':
             assert 'Spatial' in r['modalities'] and len(r['modalities'])>1,r['id']
+    ids={r['id'] for r in rows}
+    for edge in data.get('relationships',[]):
+        assert len(edge['accessions'])==2 and all(a in ids for a in edge['accessions']),edge['id']
+        if edge['status']=='Matched donors / samples':assert edge['reviewed'] and edge['matched_sample_count'],edge['id']
     for source in ['GEO','ArrayExpress','CELLxGENE','PubMed / Europe PMC']:
         assert source in data['sources'],source
     for publication in data.get('publications',[]):

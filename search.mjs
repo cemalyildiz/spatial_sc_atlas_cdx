@@ -1,6 +1,6 @@
-export const fields = ['groups','diseases','subtypes','modalities','approaches','platforms','pairing','sources','tissues','availability','access','validation'];
+export const fields = ['groups','diseases','subtypes','modalities','approaches','platforms','pairing','relationship_levels','sources','tissues','availability','access','validation'];
 export function normalize(s) { return String(s ?? '').normalize('NFKD').replace(/[\u0300-\u036f]/g,'').replace(/[’‘]/g,"'").replace(/[–—]/g,'-').toLowerCase(); }
-export function searchable(r) { return normalize([r.id,r.title,r.summary,...fields.flatMap(f=>r[f]||[]),...r.publications.flatMap(p=>[p.pmid,p.doi,p.title]),...(r.aliases||[])].join(' ')); }
+export function searchable(r) { return normalize([r.id,r.title,r.summary,...fields.flatMap(f=>r[f]||[]),...r.publications.flatMap(p=>[p.pmid,p.doi,p.title]),...(r.aliases||[]),...(r.related||[])].join(' ')); }
 export function isBoth(r) { return r.modalities.includes('Spatial') && (r.modalities.includes('scRNA-seq') || r.modalities.includes('snRNA-seq')); }
 export function priority(r) { return {'Matched donors / samples':5,'Same study — verified':4,'Same collection':3,'External reference':2,'Both reported — unverified':1}[r.pairing] || 0; }
 export function filterRecords(records,state,skip) {
@@ -25,6 +25,6 @@ export function csvCell(value) {
   return '"'+text.replaceAll('"','""')+'"';
 }
 export function toCSV(records) {
-  const columns=['id','title','diseases','subtypes','modalities','approaches','platforms','pairing','validation','sources','released','updated','checked','sample_count','cell_count','availability','access','url'];
+  const columns=['id','title','diseases','subtypes','modalities','approaches','platforms','pairing','validation','relationship_levels','related','accession_modalities','paired_sample_count','sources','released','updated','checked','sample_count','cell_count','availability','access','url'];
   return '\uFEFF'+[columns.map(csvCell).join(','),...records.map(r=>columns.map(k=>csvCell(r[k])).join(','))].join('\r\n');
 }

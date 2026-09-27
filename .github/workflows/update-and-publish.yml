@@ -21,7 +21,7 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 45
     permissions:
       contents: write
     steps:
@@ -39,6 +39,7 @@ jobs:
         run: |
           python -B validate.py
           python -B test_collect.py
+          python -B test_relationships.py
           node --test test_search.mjs
           node --check app.js
       - name: Save refreshed catalogue

@@ -30,6 +30,7 @@ Requires Python 3.9+ and Node.js 18+. No third-party runtime packages.
 python3 -B collect.py --limit 1500 --ae-limit 200
 python3 -B validate.py
 python3 -B test_collect.py
+python3 -B test_relationships.py
 node --test test_search.mjs
 python3 -m http.server 8891 --bind 127.0.0.1
 ```
@@ -43,3 +44,11 @@ The disposable `cache_cdx` folder caches public API responses for 24 hours, is e
 GitHub Pages uses the GitHub Actions source. The `Update human atlas and publish` workflow runs daily at 04:23 UTC (07:23 Europe/Istanbul), on pushes, and on manual dispatch. Pushes publish committed data without re-querying sources. Scheduled/manual refreshes collect, validate, commit `catalog.json`, and publish the same checkout. Source failures retain previous records and show a failure status; an empty aggregate never overwrites the catalogue. GitHub may delay scheduled jobs or disable inactive public-repository schedules; check the source timestamps and Actions history rather than assuming freshness.
 
 Repository metadata is public. Original datasets retain their own licensing, controlled-access rules and citation requirements. Consult the [NCBI disclaimer](https://www.ncbi.nlm.nih.gov/About/disclaimer.html) and the linked source record before reuse.
+
+## Accession relationship audit
+
+`relationships.py` scans every indexed record for direct PMID/DOI, BioProject/SRA and explicit accession links. PubMed-to-GEO discovery follows one hop without a publication-date cutoff (at most 2,500 previously unseen GEO accessions per run). Human disease and assay eligibility are still required. GEO summaries provide component assay labels and up to 500 sample titles; experimental designs are fetched for linked GEO candidates and records reporting both modalities. Raw study contact fields are not copied into the public catalogue.
+
+Relationships remain pairwise. Shared publication or project identifiers only establish an unverified candidate. A shared publication together with an identical component-normalized study title and identical experimental design supports **Same study — verified**, but never matched donors. **External reference** requires explicit reference-use wording naming the companion accession. **Matched donors / samples** requires reviewed source evidence in `curation.json`; common sample labels alone do not qualify. The LUAD example GSE189357 ↔ GSE189487 contains 9 scRNA-seq source samples and 6 Visium source samples, with 6 reviewed overlapping samples. Each accession retains its own assay labels and sample count.
+
+The `Linked study relationship` filter includes unverified candidates separately. Details show both accessions, evidence, sample-label overlap and any reviewed matched count. `Sources & updates` reports scan scope and failures. Coverage remains incomplete: one-hop discovery, missing identifiers, inaccessible designs and unreviewed donor metadata can leave true pairs unresolved. Run `python3 -B -u relationships.py` to audit the existing catalogue independently of general discovery. Design responses are cached for seven days; existing public metadata is retained on retrieval failures.

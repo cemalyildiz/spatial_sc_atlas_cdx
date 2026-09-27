@@ -75,6 +75,26 @@
         "non-small cell lung",
         "non-small-cell lung",
         "NSCLC"
+      ],
+      "Adenocarcinoma in situ (AIS)": [
+        "adenocarcinoma in situ",
+        "AIS"
+      ],
+      "Minimally invasive adenocarcinoma (MIA)": [
+        "minimally invasive adenocarcinoma",
+        "MIA"
+      ],
+      "Invasive adenocarcinoma (IAC)": [
+        "invasive adenocarcinoma",
+        "IAC"
+      ]
+    },
+    "subtype_parents": {
+      "Adenocarcinoma (LUAD)": [
+        "Non-small cell lung cancer"
+      ],
+      "Squamous cell carcinoma (LUSC)": [
+        "Non-small cell lung cancer"
       ]
     }
   },
