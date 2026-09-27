@@ -39,8 +39,9 @@ def add_geo_metadata(rec,row):
     rec['sample_metadata']=samples
     rec['sample_metadata_complete']=len(samples)==rec.get('sample_count')
     rec['accession_modalities']=components(rec['title'],samples)
+    # Study-level method mentions remain discovery leads; accession labels stay separate.
     if rec['accession_modalities']:
-        rec['modalities']=rec['accession_modalities'][:]
+        rec['modalities']=sorted(set(rec['modalities']+rec['accession_modalities']))
         rec['pairing']='Both reported — unverified' if 'Spatial' in rec['modalities'] and len(rec['modalities'])>1 else 'Not applicable'
     rec['bioprojects']=re.findall(r'PRJNA\d+',str(row.get('bioproject','')))
 

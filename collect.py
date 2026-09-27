@@ -96,7 +96,7 @@ def record(identifier, title, summary, url, source, released, **extra):
     if info:
         from relationships import components
         component_modes=components(title)
-        if component_modes:info['modalities']=component_modes
+        if component_modes:info['modalities']=sorted(set(info['modalities']+component_modes))
     if info and identifier in CURATION:
         info.update({k:v for k,v in CURATION[identifier].items() if k in info})
     if not info or not info['modalities']: return None

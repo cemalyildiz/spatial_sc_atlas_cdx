@@ -26,10 +26,10 @@ class ScientificClassification(unittest.TestCase):
         self.assertIn('Non-small cell lung cancer',classify('Lung adenocarcinoma scRNA-seq')['subtypes'])
         self.assertNotIn('Non-small cell lung cancer',classify('Small cell lung cancer scRNA-seq')['subtypes'])
 
-    def test_st_accession_not_classified_from_scrna_background(self):
+    def test_st_and_scrna_mentions_remain_unverified_study_leads(self):
         r=record('GSEtest','Lung adenocarcinoma [ST]','The study also generated scRNA-seq.','https://example.org','GEO','2021-11-30')
-        self.assertEqual(r['modalities'],['Spatial'])
-        self.assertEqual(r['pairing'],'Not applicable')
+        self.assertEqual(set(r['modalities']),{'Spatial','scRNA-seq'})
+        self.assertEqual(r['pairing'],'Both reported — unverified')
 
     def test_negated_subtype(self):
         self.assertFalse(matches('minimally invasive adenocarcinoma','invasive adenocarcinoma'))
