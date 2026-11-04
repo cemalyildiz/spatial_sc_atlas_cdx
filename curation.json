@@ -238,5 +238,23 @@
       "TD6",
       "TD8"
     ]
+  },
+  "GSE292469": {
+    "platforms": [
+      "10x Chromium"
+    ],
+    "approaches": [
+      "Sequencing-based"
+    ],
+    "evidence_url": "https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE292469",
+    "evidence": [
+      "This accession contains snRNA-seq generated with 10x Genomics Chromium 3′ v3.1 (62 libraries) and v4 (12 libraries). Xenium spatial measurements belong to the companion GSE342824 and are not a platform of this accession."
+    ],
+    "links": [
+      {
+        "label": "Companion Xenium spatial data (GSE342824)",
+        "url": "https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE342824"
+      }
+    ]
   }
 }
