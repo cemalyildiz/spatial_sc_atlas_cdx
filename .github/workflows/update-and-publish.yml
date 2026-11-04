@@ -41,6 +41,7 @@ jobs:
           python -B test_collect.py
           python -B test_relationships.py
           python -B test_assay_scope.py
+          python -B test_research.py
           node --test test_search.mjs
           node --check app.js
       - name: Save refreshed catalogue
@@ -56,6 +57,7 @@ jobs:
       - name: Package public website only
         run: |
           mkdir site_cdx
+          python -c 'import json,subprocess; print(json.dumps({"commit":subprocess.check_output(["git","rev-parse","HEAD"],text=True).strip()}))' > site_cdx/version.json
           cp index.html style.css app.js search.mjs favicon.svg catalog.json .nojekyll site_cdx/
       - uses: actions/upload-pages-artifact@v3
         with:

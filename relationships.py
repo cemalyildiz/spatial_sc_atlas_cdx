@@ -248,7 +248,10 @@ def enrich(records,pubs,discover=True):
 def main():
     import collect as c
     path=c.ROOT/'catalog.json';data=json.loads(path.read_text())
+    prior=data['records'][:]
     data['records'],data['relationships'],data['relationship_scan']=enrich(data['records'],data.get('publications',[]))
+    from research import refresh
+    refresh(data['records'],prior)
     data['records'].sort(key=lambda r:r['released'],reverse=True)
     for name,status in data['sources'].items():
         if name!='PubMed / Europe PMC':status['count']=sum(name in r['sources'] for r in data['records'])

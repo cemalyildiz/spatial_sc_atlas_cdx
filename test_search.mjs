@@ -26,3 +26,14 @@ test('reviewed LUAD pair is found with the original NSCLC and paired filters',as
   assert.equal(result.find(r=>r.id==='GSE189487').sample_count,6);
   assert.ok(result.every(r=>r.paired_sample_count===6));
 });
+
+test('local spatial search excludes RNA-only companion unless study mentions requested',()=>{
+ const r={...matched,accession_modalities:['snRNA-seq']};
+ assert.equal(filterRecords([r],{preset:'spatial'}).length,0);
+ assert.equal(filterRecords([r],{preset:'spatial',companions:true}).length,1);
+});
+test('sample tissue and diagnosis require the same source sample',()=>{
+ const r={...base,sampled_tissues:['Blood','Brain'],sampled_diagnoses:['PSP'],sample_observations:[{tissues:['Blood'],diagnoses:[],clinical:[]},{tissues:['Brain'],diagnoses:['PSP'],clinical:[]}]};
+ assert.equal(filterRecords([r],{sampled_tissues:['Blood'],sampled_diagnoses:['PSP']}).length,0);
+ assert.equal(filterRecords([r],{sampled_tissues:['Brain'],sampled_diagnoses:['PSP']}).length,1);
+});

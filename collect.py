@@ -107,8 +107,8 @@ def record(identifier, title, summary, url, source, released, **extra):
     rec.update(extra)
     return rec
 
-def geo_search(term, limit):
-    result = api(EUTILS+'esearch.fcgi', db='gds', term=f'({term}) AND "Homo sapiens"[Organism] AND gse[Entry Type]', retmode='json', retmax=limit)['esearchresult']
+def geo_search(term, limit, offset=0):
+    result = api(EUTILS+'esearch.fcgi', db='gds', term=f'({term}) AND "Homo sapiens"[Organism] AND gse[Entry Type]', retmode='json', retmax=limit, retstart=offset)['esearchresult']
     return result['idlist'], int(result['count'])
 
 def geo_fetch(ids):
@@ -152,6 +152,10 @@ def collect_geo(limit):
         disease = ' OR '.join('"'+t+'"' for t in terms)
         term = f'({disease}) AND ({spatial} OR {single})'
         found,total = geo_search(term,35); ids += found
+        if total>35:
+            start=35*(1+dt.datetime.now(dt.timezone.utc).date().toordinal()%((total-1)//35))
+            more,_=geo_search(term,35,start);ids+=more
+            queries.append(dict(label=row['disease']+' rotating page',query=term,total=total,retrieved=len(more),limit=35,offset=start))
         queries.append(dict(label=row['disease']+' and subtypes',query=term,total=total,retrieved=len(found),limit=35))
     return geo_fetch(ids), dict(queries=queries, scanned=len(set(ids)), note='Spatial discovery plus recent single-cell studies and targeted disease/subtype searches. Query limits are shown; this is not an exhaustive census. Mixed-species series excluded.')
 
@@ -317,6 +321,8 @@ def main():
     records,relationships,relationship_scan=enrich(records,pubs)
     for name, status in statuses.items():
         if name != 'PubMed / Europe PMC': status['count']=sum(name in r['sources'] for r in records)
+    from research import refresh
+    refresh(records,old['records'])
     records.sort(key=lambda r:r['released'],reverse=True)
     payload=dict(schema_version=2,relationships=relationships,relationship_scan=relationship_scan,generated_at=NOW,sources=statuses,records=records,publications=pubs,taxonomy=TAXONOMY)
     if not records: raise RuntimeError('No records; existing catalogue untouched')
