@@ -9,7 +9,11 @@ def validate():
     rows=data['records']
     assert len(rows)>0, 'No dataset records'
     assert len({r['id'] for r in rows})==len(rows), 'Duplicate accessions'
+    from assay_scope import scoped
+    from collect import CURATION
     for r in rows:
+        expected=scoped(r,CURATION.get(r['id'],{}).get('accession_assay_review'))
+        for k,v in expected.items():assert r.get(k)==v,(r['id'],k,'unsupported accession label')
         assert r['organism']=='Homo sapiens', r['id']
         assert r['title'] and r['sources'] and r['modalities'], r['id']
         assert set(r['modalities']) <= {'Spatial','scRNA-seq','snRNA-seq'}, r['id']

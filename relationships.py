@@ -235,14 +235,10 @@ def enrich(records,pubs,discover=True):
                 by_id[aid].update(f.result());success+=1
             except Exception as e:stats['errors'].append(aid+': '+str(e)[:120])
             if (success+len(stats['errors']))%50==0:print('Experimental designs:',success,'/',len(target),flush=True)
-    for r in records:
-        info=c.classify(r['title']+' '+r.get('summary','')+' '+r.get('overall_design',''))
-        if info and r['id'] not in c.CURATION:
-            for field in ['platforms','approaches']:
-                values=sorted((set(r[field])|set(info[field]))-{'Not specified'})
-                r[field]=values or ['Not specified']
     stats.update(designs_requested=len(target),designs_read=success,records_scanned=len(records))
     edges=build_relationships(records,c.CURATION)
+    from assay_scope import audit
+    audit(records,c.CURATION)
     stats['relationship_counts']=dict(Counter(e['status'] for e in edges))
     stats['status']='partial' if stats['errors'] or len(found)>stats['discovery_limit'] else 'ok'
     stats['note']='Every indexed record was checked for direct publication, BioProject/SRA and accession links. Experimental designs were read for linked GEO candidates and records reporting both modalities. Shared sample labels are candidates, not proof of matched donors. Discovery is one hop, capped per run; unread or unavailable metadata remains unverified.'

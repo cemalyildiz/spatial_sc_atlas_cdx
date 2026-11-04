@@ -4,13 +4,6 @@
       "Spatial",
       "scRNA-seq"
     ],
-    "platforms": [
-      "Visium",
-      "10x Chromium"
-    ],
-    "approaches": [
-      "Sequencing-based"
-    ],
     "diseases": [
       "Breast cancer"
     ],
@@ -50,16 +43,6 @@
       "Spatial",
       "scRNA-seq"
     ],
-    "platforms": [
-      "CosMx",
-      "Xenium",
-      "MERFISH",
-      "10x Chromium"
-    ],
-    "approaches": [
-      "Imaging-based",
-      "Sequencing-based"
-    ],
     "pairing": "Same study — verified",
     "validation": "Source-reviewed pairing",
     "evidence": [
@@ -72,7 +55,14 @@
         "url": "https://pubmed.ncbi.nlm.nih.gov/41266321/"
       }
     ],
-    "updated": "2026-01-05"
+    "updated": "2026-01-05",
+    "accession_assay_review": {
+      "platforms": [
+        "CosMx"
+      ],
+      "url": "https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE308146",
+      "basis": "The GEO component title and sample labels specify CosMx data."
+    }
   },
   "GSE284230": {
     "modalities": [
@@ -111,12 +101,6 @@
     "modalities": [
       "Spatial",
       "scRNA-seq"
-    ],
-    "platforms": [
-      "Visium"
-    ],
-    "approaches": [
-      "Sequencing-based"
     ],
     "diseases": [
       "Lung cancer"
@@ -178,12 +162,6 @@
       "Spatial",
       "scRNA-seq"
     ],
-    "platforms": [
-      "Visium"
-    ],
-    "approaches": [
-      "Sequencing-based"
-    ],
     "diseases": [
       "Lung cancer"
     ],
@@ -237,15 +215,16 @@
       "TD5",
       "TD6",
       "TD8"
-    ]
+    ],
+    "accession_assay_review": {
+      "platforms": [
+        "Visium"
+      ],
+      "url": "https://www.nature.com/articles/s12276-022-00896-9",
+      "basis": "GSE189487 deposits the six Visium spatial libraries; the scRNA-seq libraries are in GSE189357."
+    }
   },
   "GSE292469": {
-    "platforms": [
-      "10x Chromium"
-    ],
-    "approaches": [
-      "Sequencing-based"
-    ],
     "evidence_url": "https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE292469",
     "evidence": [
       "This accession contains snRNA-seq generated with 10x Genomics Chromium 3′ v3.1 (62 libraries) and v4 (12 libraries). Xenium spatial measurements belong to the companion GSE342824 and are not a platform of this accession."
@@ -255,6 +234,13 @@
         "label": "Companion Xenium spatial data (GSE342824)",
         "url": "https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE342824"
       }
-    ]
+    ],
+    "accession_assay_review": {
+      "platforms": [
+        "10x Chromium"
+      ],
+      "url": "https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE292469",
+      "basis": "This accession contains snRNA-seq generated with 10x Genomics Chromium 3′ v3.1 (62 libraries) and v4 (12 libraries). Xenium spatial measurements belong to the companion GSE342824 and are not a platform of this accession."
+    }
   }
 }

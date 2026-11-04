@@ -228,6 +228,7 @@ def collect_cellxgene():
         for k in ['diseases','groups','subtypes']: rec[k]=info[k]
         rec['summary']=summary[:1300]
         rec['tissues']=sorted({x['label'] for d in diseased for x in d.get('tissue',[])})
+        rec['repository_assays']=assays
         rec['platforms']=assays
         rec['approaches']=sorted({approach for name,(pattern,approach) in PLATFORMS.items() if any(re.search(pattern,a,re.I) for a in assays)}) or (['Sequencing-based'] if 'Spatial' not in mods else ['Not specified'])
         rec['availability']=['Processed matrix','Cell annotations']
